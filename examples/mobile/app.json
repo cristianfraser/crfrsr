@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "crfrsr Design System Example",
+    "slug": "crfrsr-design-system-example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#ffffff",
+      "resizeMode": "contain"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.crfrsr.designsystemexample"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.crfrsr.designsystemexample"
+    }
+  }
+}
+
