@@ -8,7 +8,8 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace=@crfrsr/design-system-core --workspace=@crfrsr/design-system-react --workspace=@crfrsr/design-system-react-native",
+    "build:examples": "npm run build --workspace=crfrsr-design-system-web-example --workspace=crfrsr-design-system-mobile-example --if-present",
     "clean": "npm run clean --workspaces --if-present && rm -rf node_modules",
     "test": "npm run test --workspaces --if-present",
     "publish:all": "npm run build && npm publish --workspace=@crfrsr/design-system-core && npm publish --workspace=@crfrsr/design-system-react && npm publish --workspace=@crfrsr/design-system-react-native",

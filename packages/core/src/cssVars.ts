@@ -8,10 +8,18 @@
  */
 
 import { ColorMode } from './colors';
-import { createTheme } from './theme';
+import { Theme, ThemeOverrides, createTheme } from './theme';
 
-export function getCssVariables(mode: ColorMode = 'light'): Record<string, string> {
-  const theme = createTheme(mode);
+/** Convenience wrapper: build a (possibly overridden) theme, then map it to vars. */
+export function getCssVariables(
+  mode: ColorMode = 'light',
+  overrides?: ThemeOverrides
+): Record<string, string> {
+  return themeToCssVariables(createTheme(mode, overrides));
+}
+
+/** Maps a resolved Theme to the --crfrsr-* variables the shipped CSS reads. */
+export function themeToCssVariables(theme: Theme): Record<string, string> {
   const c = theme.colors;
   const t = theme.typography;
 

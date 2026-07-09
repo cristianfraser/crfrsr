@@ -104,11 +104,39 @@ export const defaultTheme: Theme = {
   },
 };
 
-export function createTheme(mode: ColorMode = 'light'): Theme {
+/**
+ * Per-app theme customization. Every field is optional and merged over the
+ * defaults; colors are overridden per mode so an app can restyle light and dark
+ * independently. Apps mount the shared ThemeProvider with one of these — they
+ * should never build their own provider.
+ */
+export interface ThemeOverrides {
+  colors?: Partial<Record<ColorMode, Partial<ColorPalette>>>;
+  typography?: {
+    fontFamily?: Partial<Theme['typography']['fontFamily']>;
+    fontSize?: Partial<Theme['typography']['fontSize']>;
+    fontWeight?: Partial<Theme['typography']['fontWeight']>;
+    lineHeight?: Partial<Theme['typography']['lineHeight']>;
+  };
+  spacing?: Partial<Theme['spacing']>;
+  radius?: Partial<Theme['radius']>;
+  shadow?: Partial<Theme['shadow']>;
+}
+
+export function createTheme(mode: ColorMode = 'light', overrides?: ThemeOverrides): Theme {
+  const base = defaultTheme;
   return {
-    ...defaultTheme,
     mode,
-    colors: getColors(mode),
+    colors: { ...getColors(mode), ...overrides?.colors?.[mode] },
+    typography: {
+      fontFamily: { ...base.typography.fontFamily, ...overrides?.typography?.fontFamily },
+      fontSize: { ...base.typography.fontSize, ...overrides?.typography?.fontSize },
+      fontWeight: { ...base.typography.fontWeight, ...overrides?.typography?.fontWeight },
+      lineHeight: { ...base.typography.lineHeight, ...overrides?.typography?.lineHeight },
+    },
+    spacing: { ...base.spacing, ...overrides?.spacing },
+    radius: { ...base.radius, ...overrides?.radius },
+    shadow: { ...base.shadow, ...overrides?.shadow },
   };
 }
 

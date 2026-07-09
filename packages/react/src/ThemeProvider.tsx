@@ -1,5 +1,11 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import { Theme, createTheme, ColorMode, getCssVariables } from '@crfrsr/design-system-core';
+import {
+  Theme,
+  ThemeOverrides,
+  createTheme,
+  ColorMode,
+  themeToCssVariables,
+} from '@crfrsr/design-system-core';
 
 interface ThemeContextValue {
   theme: Theme;
@@ -14,26 +20,34 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 export interface ThemeProviderProps {
   children: ReactNode;
   initialMode?: ColorMode;
+  /**
+   * Per-app theme customization, merged over the library defaults. Define it at
+   * module level (or memoize it) so its identity is stable across renders.
+   */
+  theme?: ThemeOverrides;
   skipBodyFontFamily?: boolean;
 }
 
 export function ThemeProvider({
   children,
   initialMode = 'light',
+  theme: themeOverrides,
   skipBodyFontFamily = false,
 }: ThemeProviderProps) {
   const [mode, setMode] = React.useState<ColorMode>(initialMode);
 
   const theme = React.useMemo(() => {
-    return createTheme(mode);
-  }, [mode]);
+    return createTheme(mode, themeOverrides);
+  }, [mode, themeOverrides]);
 
-  // Set global CSS variables from theme
-  React.useEffect(() => {
+  // Set global CSS variables from theme. useLayoutEffect so the app's palette
+  // lands before first paint — with useEffect the initial frame would flash the
+  // static tokens.css defaults.
+  React.useLayoutEffect(() => {
     const root = document.documentElement;
 
     // Full --crfrsr-* contract consumed by the shipped component CSS
-    const vars = getCssVariables(mode);
+    const vars = themeToCssVariables(theme);
     for (const [name, value] of Object.entries(vars)) {
       root.style.setProperty(name, value);
     }
@@ -53,15 +67,7 @@ export function ThemeProvider({
     }
     document.body.style.color = theme.colors.text;
     document.body.style.backgroundColor = theme.colors.background;
-  }, [
-    mode,
-    theme.colors.background,
-    theme.colors.surface,
-    theme.colors.border,
-    theme.typography.fontFamily.base,
-    theme.colors.text,
-    skipBodyFontFamily,
-  ]);
+  }, [mode, theme, skipBodyFontFamily]);
 
   const toggleMode = React.useCallback(() => {
     setMode(prevMode => prevMode === 'dark' ? 'light' : 'dark');
