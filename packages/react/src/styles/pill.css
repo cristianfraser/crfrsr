@@ -1,0 +1,44 @@
+/* crfrsr Design System — Pill */
+
+.crfrsr-pill {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  color: var(--crfrsr-pill-color, #ffffff);
+  background-color: var(--crfrsr-pill-bg, var(--crfrsr-color-secondary));
+  font-weight: var(--crfrsr-font-weight-bold, 700);
+  border-radius: var(--crfrsr-radius-sm);
+  cursor: default;
+  /* Default font size; consumers override per-size via className if desired. */
+  font-size: var(--crfrsr-pill-font-size, var(--crfrsr-font-size-xs, 0.75rem));
+}
+
+.crfrsr-pill--uppercase .crfrsr-pill__label {
+  text-transform: uppercase;
+}
+
+.crfrsr-pill--hoverable {
+  transition: background-color 0.2s ease;
+}
+.crfrsr-pill--hoverable:hover {
+  background-color: var(--crfrsr-pill-bg-hover, var(--crfrsr-pill-bg));
+}
+
+/* Space between glyph and label only when both are present. */
+.crfrsr-pill__glyph + .crfrsr-pill__label {
+  margin-left: 0.125rem;
+}
+
+/* ----- Sizes ----------------------------------------------------------- */
+
+.crfrsr-pill--default {
+  padding: 1px 0.375rem;
+}
+.crfrsr-pill--small {
+  padding: 1px 0.25rem;
+  line-height: 12px;
+}
+.crfrsr-pill--icon {
+  padding: 1px 0.25rem;
+  line-height: 12px;
+}

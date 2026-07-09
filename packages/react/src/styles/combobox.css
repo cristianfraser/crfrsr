@@ -1,0 +1,200 @@
+/* crfrsr Design System — Combobox (+ popover & command primitives) */
+
+/* ----- Popover --------------------------------------------------------- */
+
+@keyframes crfrsr-popover-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes crfrsr-popover-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.crfrsr-popover__content {
+  z-index: 50;
+  width: 18rem;
+  padding: 1rem;
+  border-radius: var(--crfrsr-radius-md);
+  border: 1px solid var(--crfrsr-color-border);
+  background-color: var(--crfrsr-color-surface);
+  color: var(--crfrsr-color-text);
+  box-shadow: var(--crfrsr-shadow-md);
+  outline: none;
+  transform-origin: var(--radix-popover-content-transform-origin);
+}
+/* Duration (0.2s) must match the 200ms search-reset timer in Combobox.tsx. */
+.crfrsr-popover__content[data-state='open'] {
+  animation: crfrsr-popover-in 0.2s ease-out;
+}
+.crfrsr-popover__content[data-state='closed'] {
+  animation: crfrsr-popover-out 0.2s ease-in;
+}
+
+/* ----- Command (cmdk) -------------------------------------------------- */
+
+.crfrsr-command {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--crfrsr-radius-md);
+  background-color: var(--crfrsr-color-surface);
+  color: var(--crfrsr-color-text);
+}
+
+.crfrsr-command__input-wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--crfrsr-color-border);
+  padding: 0 0.75rem;
+}
+
+.crfrsr-command__input-icon {
+  margin-right: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.crfrsr-command__input {
+  display: flex;
+  height: 2.5rem;
+  width: 100%;
+  border: 0;
+  border-radius: var(--crfrsr-radius-md);
+  background-color: transparent;
+  padding: 0.75rem 0;
+  font-size: var(--crfrsr-font-size-sm, 0.875rem);
+  color: inherit;
+  outline: none;
+}
+.crfrsr-command__input::placeholder {
+  color: var(--crfrsr-color-text-secondary);
+}
+.crfrsr-command__input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.crfrsr-command__list {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.crfrsr-command__empty {
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: var(--crfrsr-font-size-sm, 0.875rem);
+}
+
+.crfrsr-command__group {
+  overflow: hidden;
+  padding: 0.25rem;
+  color: var(--crfrsr-color-text);
+}
+.crfrsr-command__group [cmdk-group-heading] {
+  padding: 0.375rem 0.5rem;
+  font-size: var(--crfrsr-font-size-xs, 0.75rem);
+  font-weight: var(--crfrsr-font-weight-medium, 500);
+  color: var(--crfrsr-color-text-secondary);
+}
+
+.crfrsr-command__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: default;
+  user-select: none;
+  border-radius: var(--crfrsr-radius-sm);
+  padding: 0.375rem 0.5rem;
+  font-size: var(--crfrsr-font-size-sm, 0.875rem);
+  color: var(--crfrsr-color-text);
+  outline: none;
+}
+.crfrsr-command__item[data-disabled='true'] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.crfrsr-command__item[data-selected='true'] {
+  background-color: var(--crfrsr-color-surface-hover);
+  color: var(--crfrsr-color-text);
+}
+
+.crfrsr-command__separator {
+  height: 1px;
+  background-color: var(--crfrsr-color-border);
+}
+
+/* ----- Combobox (overrides win over the command defaults above) -------- */
+
+.crfrsr-combobox {
+  position: relative;
+}
+
+.crfrsr-combobox__popover {
+  padding: 0;
+  overflow: hidden;
+}
+
+.crfrsr-combobox__list {
+  max-height: 30vh;
+  overflow: auto;
+}
+@media (min-width: 640px) {
+  .crfrsr-combobox__list {
+    max-height: 300px;
+  }
+}
+
+.crfrsr-combobox__message {
+  padding: 0.5rem;
+  text-align: center;
+  font-size: var(--crfrsr-font-size-xs, 0.75rem);
+}
+
+.crfrsr-combobox__clear {
+  position: absolute;
+  right: -1rem;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  color: var(--crfrsr-color-text-secondary);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  z-index: 10;
+}
+.crfrsr-combobox:hover .crfrsr-combobox__clear {
+  opacity: 1;
+}
+.crfrsr-combobox__clear:hover {
+  color: var(--crfrsr-color-text);
+}
+.crfrsr-combobox__clear svg {
+  width: 1rem;
+  height: 1rem;
+}

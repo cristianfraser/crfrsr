@@ -1,0 +1,14 @@
+/*
+ * crfrsr Design System — component styles aggregator.
+ *
+ * Import this once in your app for all component CSS. It does NOT include the
+ * reset or token defaults — import those separately and first:
+ *
+ *   import '@crfrsr/design-system-react/reset.css';
+ *   import '@crfrsr/design-system-react/tokens.css';
+ *   import '@crfrsr/design-system-react/styles.css';
+ */
+
+@import './button.css';
+@import './pill.css';
+@import './combobox.css';

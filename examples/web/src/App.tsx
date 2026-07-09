@@ -1,5 +1,129 @@
-import { ThemeProvider, Text, Heading, useTheme } from '@crfrsr/design-system-react';
+import * as React from 'react';
+import {
+  ThemeProvider,
+  Text,
+  Heading,
+  useTheme,
+  Button,
+  Pill,
+  Combobox,
+  CommandItem,
+} from '@crfrsr/design-system-react';
 import './App.css';
+
+// ---- Components showcase ------------------------------------------------
+
+const PILL_COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
+
+const MOCK_OPTIONS = Array.from({ length: 500 }, (_, i) => ({
+  id: i,
+  label: `Option ${i + 1}`,
+}));
+
+type MockOption = (typeof MOCK_OPTIONS)[number];
+
+function ComponentsShowcase() {
+  const { theme } = useTheme();
+
+  const [search, setSearch] = React.useState('');
+  const [selected, setSelected] = React.useState<MockOption | null>(null);
+
+  const filtered = React.useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return MOCK_OPTIONS;
+    return MOCK_OPTIONS.filter((o) => o.label.toLowerCase().includes(q));
+  }, [search]);
+
+  const cardStyle: React.CSSProperties = {
+    padding: '1.5rem',
+    borderRadius: '8px',
+    backgroundColor: theme.colors.surface,
+    border: `1px solid ${theme.colors.border}`,
+    marginBottom: '1.5rem',
+  };
+
+  return (
+    <section style={{ marginBottom: '3rem' }}>
+      <Heading level={2} style={{ marginBottom: '1rem' }}>
+        Components
+      </Heading>
+
+      {/* Buttons */}
+      <div style={cardStyle}>
+        <Heading level={3} style={{ marginBottom: '1rem' }}>
+          Button
+        </Heading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', marginBottom: '1rem' }}>
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button disabled>Disabled</Button>
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
+          <Button size="sm">Small</Button>
+          <Button size="md">Medium</Button>
+          <Button size="lg">Large</Button>
+          <Button size="icon" aria-label="icon button">★</Button>
+        </div>
+      </div>
+
+      {/* Pills */}
+      <div style={cardStyle}>
+        <Heading level={3} style={{ marginBottom: '1rem' }}>
+          Pill
+        </Heading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center', marginBottom: '1rem' }}>
+          {PILL_COLORS.map((c, i) => (
+            <Pill key={c} color={c} hoverColor={theme.colors.text} glyph={<span>{i + 1}</span>}>
+              Label {i + 1}
+            </Pill>
+          ))}
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
+          <Pill size="default" color={PILL_COLORS[0]}>Default</Pill>
+          <Pill size="small" color={PILL_COLORS[1]}>Small</Pill>
+          <Pill size="icon" color={PILL_COLORS[2]} glyph={<span>i</span>} uppercase={false} />
+        </div>
+      </div>
+
+      {/* Combobox */}
+      <div style={cardStyle}>
+        <Heading level={3} style={{ marginBottom: '1rem' }}>
+          Combobox (virtualized, 500 options)
+        </Heading>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <Combobox<MockOption>
+            options={MOCK_OPTIONS}
+            filteredOptions={filtered}
+            searchValue={search}
+            onSearchChange={setSearch}
+            onSelect={setSelected}
+            value={selected}
+            showClearButton
+            onClear={() => setSelected(null)}
+            popoverWidth="220px"
+            placeholder="Search options..."
+            emptyMessage="No options found."
+            trigger={
+              <Button variant="outline" size="sm">
+                {selected ? selected.label : 'Select an option'}
+              </Button>
+            }
+            renderOption={(option, _index, onSelectOption) => (
+              <CommandItem key={option.id} value={option.label} onSelect={onSelectOption}>
+                {option.label}
+              </CommandItem>
+            )}
+          />
+          <Text color="textSecondary" variant="sm">
+            Selected: {selected ? selected.label : 'none'}
+          </Text>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function AppContent() {
   const { theme, toggleMode, isLight } = useTheme();
@@ -34,6 +158,8 @@ function AppContent() {
         <div style={{ marginBottom: '2rem' }}>
           <Heading level={1}>crfrsr Design System</Heading>
         </div>
+
+        <ComponentsShowcase />
 
         <section style={{ marginBottom: '3rem' }}>
           <Heading level={2} style={{ marginBottom: '1rem' }}>Typography Examples</Heading>

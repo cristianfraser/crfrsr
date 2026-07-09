@@ -1,0 +1,89 @@
+/* crfrsr Design System — Button */
+
+.crfrsr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  font-family: inherit;
+  font-weight: var(--crfrsr-font-weight-medium, 500);
+  line-height: 1.25;
+  border-radius: var(--crfrsr-radius-lg);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.crfrsr-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--crfrsr-color-background),
+    0 0 0 4px var(--crfrsr-color-focus-ring);
+}
+
+.crfrsr-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ----- Variants -------------------------------------------------------- */
+
+/* primary */
+.crfrsr-btn--primary {
+  background-color: var(--crfrsr-btn-primary-bg, var(--crfrsr-color-primary));
+  color: var(--crfrsr-btn-primary-color, var(--crfrsr-color-text-on-primary));
+}
+.crfrsr-btn--primary:hover:not(:disabled) {
+  background-color: var(--crfrsr-btn-primary-bg-hover, var(--crfrsr-color-primary-dark));
+}
+
+/* secondary — neutral filled button (light in light mode). Exposed as its own
+   set of vars because the "secondary" palette color is a text tone, not a good
+   button fill. */
+.crfrsr-btn--secondary {
+  background-color: var(--crfrsr-btn-secondary-bg, var(--crfrsr-color-surface-hover));
+  color: var(--crfrsr-btn-secondary-color, var(--crfrsr-color-text));
+}
+.crfrsr-btn--secondary:hover:not(:disabled) {
+  background-color: var(--crfrsr-btn-secondary-bg-hover, var(--crfrsr-color-divider));
+}
+
+/* outline */
+.crfrsr-btn--outline {
+  background-color: transparent;
+  color: var(--crfrsr-color-text);
+  border: 1px solid var(--crfrsr-color-border);
+}
+.crfrsr-btn--outline:hover:not(:disabled) {
+  background-color: var(--crfrsr-color-surface-hover);
+}
+
+/* ghost */
+.crfrsr-btn--ghost {
+  background-color: transparent;
+  color: var(--crfrsr-color-text);
+}
+.crfrsr-btn--ghost:hover:not(:disabled) {
+  background-color: var(--crfrsr-color-surface-hover);
+}
+
+/* ----- Sizes ----------------------------------------------------------- */
+
+.crfrsr-btn--sm {
+  padding: 0.375rem 0.75rem;
+  font-size: var(--crfrsr-font-size-sm, 0.875rem);
+}
+.crfrsr-btn--md {
+  padding: 0.5rem 1rem;
+  font-size: var(--crfrsr-font-size-base, 1rem);
+}
+.crfrsr-btn--lg {
+  padding: 0.75rem 1.5rem;
+  font-size: var(--crfrsr-font-size-lg, 1.125rem);
+}
+.crfrsr-btn--icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+}
