@@ -25,14 +25,26 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./reset.css": "./dist/styles/reset.css",
+    "./tokens.css": "./dist/styles/tokens.css",
+    "./styles.css": "./dist/styles/styles.css",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node scripts/copy-styles.mjs",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build"
   },
@@ -41,7 +53,11 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@crfrsr/design-system-core": "^1.0.0"
+    "@crfrsr/design-system-core": "^1.0.0",
+    "@radix-ui/react-popover": "^1.1.2",
+    "@tanstack/react-virtual": "^3.10.8",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

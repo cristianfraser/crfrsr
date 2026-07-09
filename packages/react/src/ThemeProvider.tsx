@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import { Theme, createTheme, ColorMode } from '@crfrsr/design-system-core';
+import { Theme, createTheme, ColorMode, getCssVariables } from '@crfrsr/design-system-core';
 
 interface ThemeContextValue {
   theme: Theme;
@@ -30,17 +30,31 @@ export function ThemeProvider({
 
   // Set global CSS variables from theme
   React.useEffect(() => {
-    document.documentElement.style.setProperty('--theme-background', theme.colors.background);
-    document.documentElement.style.setProperty('--theme-surface', theme.colors.surface);
-    document.documentElement.style.setProperty('--theme-border', theme.colors.border);
-    document.documentElement.style.setProperty('--theme-font-family', theme.typography.fontFamily.base);
-    document.documentElement.style.setProperty('--theme-text-color', theme.colors.text);
+    const root = document.documentElement;
+
+    // Full --crfrsr-* contract consumed by the shipped component CSS
+    const vars = getCssVariables(mode);
+    for (const [name, value] of Object.entries(vars)) {
+      root.style.setProperty(name, value);
+    }
+
+    // Marker class so the static tokens.css `.crfrsr-dark` block can also apply
+    root.classList.toggle('crfrsr-dark', mode === 'dark');
+
+    // Legacy --theme-* variables kept for backward compatibility (examples/web)
+    root.style.setProperty('--theme-background', theme.colors.background);
+    root.style.setProperty('--theme-surface', theme.colors.surface);
+    root.style.setProperty('--theme-border', theme.colors.border);
+    root.style.setProperty('--theme-font-family', theme.typography.fontFamily.base);
+    root.style.setProperty('--theme-text-color', theme.colors.text);
+
     if (!skipBodyFontFamily) {
       document.body.style.fontFamily = theme.typography.fontFamily.base;
     }
     document.body.style.color = theme.colors.text;
     document.body.style.backgroundColor = theme.colors.background;
   }, [
+    mode,
     theme.colors.background,
     theme.colors.surface,
     theme.colors.border,

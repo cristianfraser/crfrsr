@@ -42,6 +42,16 @@ export interface Theme {
     xl: number;
     '2xl': number;
   };
+  radius: {
+    sm: string;
+    md: string;
+    lg: string;
+    full: string;
+  };
+  shadow: {
+    sm: string;
+    md: string;
+  };
 }
 
 export const defaultTheme: Theme = {
@@ -81,6 +91,16 @@ export const defaultTheme: Theme = {
     lg: 24,
     xl: 32,
     '2xl': 48,
+  },
+  radius: {
+    sm: '0.25rem',   // 4px
+    md: '0.375rem',  // 6px
+    lg: '0.5rem',    // 8px
+    full: '9999px',
+  },
+  shadow: {
+    sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+    md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
   },
 };
 

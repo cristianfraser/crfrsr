@@ -1,0 +1,100 @@
+/*
+ * crfrsr Design System — tokens.css
+ *
+ * Static default values for the --crfrsr-* contract. These mirror the light and
+ * dark output of `getCssVariables()` in @crfrsr/design-system-core and provide
+ * first-paint / no-JS / no-ThemeProvider defaults. ThemeProvider overrides these
+ * at runtime for the active mode.
+ *
+ * Keep in sync with packages/core/src/{colors,theme,cssVars}.ts.
+ *
+ * Apps re-theme by overriding any of these variables in their own stylesheet.
+ */
+
+:root {
+  /* Colors */
+  --crfrsr-color-primary: #0066ff;
+  --crfrsr-color-primary-light: #3385ff;
+  --crfrsr-color-primary-dark: #0052cc;
+  --crfrsr-color-text-on-primary: #ffffff;
+  --crfrsr-color-secondary: #6c757d;
+  --crfrsr-color-secondary-light: #8e959c;
+  --crfrsr-color-secondary-dark: #545b62;
+  --crfrsr-color-success: #28a745;
+  --crfrsr-color-warning: #ffc107;
+  --crfrsr-color-error: #dc3545;
+  --crfrsr-color-info: #17a2b8;
+  --crfrsr-color-background: #ffffff;
+  --crfrsr-color-surface: #f8f9fa;
+  --crfrsr-color-surface-hover: #f1f3f5;
+  --crfrsr-color-text: #212529;
+  --crfrsr-color-text-secondary: #6c757d;
+  --crfrsr-color-text-disabled: #adb5bd;
+  --crfrsr-color-border: #dee2e6;
+  --crfrsr-color-divider: #e9ecef;
+  --crfrsr-color-focus-ring: #0066ff;
+  --crfrsr-color-overlay: rgb(0 0 0 / 0.5);
+
+  /* Typography */
+  --crfrsr-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --crfrsr-font-family-mono: Menlo, Monaco, 'Courier New', monospace;
+  --crfrsr-font-size-xs: 0.75rem;
+  --crfrsr-font-size-sm: 0.875rem;
+  --crfrsr-font-size-base: 1rem;
+  --crfrsr-font-size-lg: 1.125rem;
+  --crfrsr-font-size-xl: 1.25rem;
+  --crfrsr-font-size-2xl: 1.5rem;
+  --crfrsr-font-size-3xl: 1.875rem;
+  --crfrsr-font-size-4xl: 2.25rem;
+  --crfrsr-font-weight-normal: 400;
+  --crfrsr-font-weight-medium: 500;
+  --crfrsr-font-weight-semibold: 600;
+  --crfrsr-font-weight-bold: 700;
+  --crfrsr-line-height-tight: 1.25;
+  --crfrsr-line-height-normal: 1.5;
+  --crfrsr-line-height-relaxed: 1.75;
+
+  /* Radius */
+  --crfrsr-radius-sm: 0.25rem;
+  --crfrsr-radius-md: 0.375rem;
+  --crfrsr-radius-lg: 0.5rem;
+  --crfrsr-radius-full: 9999px;
+
+  /* Spacing */
+  --crfrsr-spacing-xs: 4px;
+  --crfrsr-spacing-sm: 8px;
+  --crfrsr-spacing-md: 16px;
+  --crfrsr-spacing-lg: 24px;
+  --crfrsr-spacing-xl: 32px;
+  --crfrsr-spacing-2xl: 48px;
+
+  /* Shadow */
+  --crfrsr-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --crfrsr-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Dark mode: only the color tokens change. */
+.crfrsr-dark {
+  --crfrsr-color-primary: #4d9aff;
+  --crfrsr-color-primary-light: #66adff;
+  --crfrsr-color-primary-dark: #3385ff;
+  --crfrsr-color-text-on-primary: #ffffff;
+  --crfrsr-color-secondary: #adb5bd;
+  --crfrsr-color-secondary-light: #ced4da;
+  --crfrsr-color-secondary-dark: #8e959c;
+  --crfrsr-color-success: #48d597;
+  --crfrsr-color-warning: #ffd54f;
+  --crfrsr-color-error: #ff6b6b;
+  --crfrsr-color-info: #4dd0e1;
+  --crfrsr-color-background: #121212;
+  --crfrsr-color-surface: #1e1e1e;
+  --crfrsr-color-surface-hover: #2a2a2a;
+  --crfrsr-color-text: #ffffff;
+  --crfrsr-color-text-secondary: #b0b0b0;
+  --crfrsr-color-text-disabled: #6c6c6c;
+  --crfrsr-color-border: #2e2e2e;
+  --crfrsr-color-divider: #3a3a3a;
+  --crfrsr-color-focus-ring: #4d9aff;
+  --crfrsr-color-overlay: rgb(0 0 0 / 0.7);
+}

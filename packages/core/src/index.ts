@@ -5,5 +5,6 @@
 
 export * from './colors';
 export * from './theme';
+export * from './cssVars';
 export type { Theme } from './theme';
 
