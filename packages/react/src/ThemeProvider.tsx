@@ -13,13 +13,17 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export interface ThemeProviderProps {
   children: ReactNode;
+  initialMode?: ColorMode;
+  skipBodyFontFamily?: boolean;
 }
 
-export function ThemeProvider({ 
-  children, 
+export function ThemeProvider({
+  children,
+  initialMode = 'light',
+  skipBodyFontFamily = false,
 }: ThemeProviderProps) {
-  const [mode, setMode] = React.useState<ColorMode>('light');
-  
+  const [mode, setMode] = React.useState<ColorMode>(initialMode);
+
   const theme = React.useMemo(() => {
     return createTheme(mode);
   }, [mode]);
@@ -31,7 +35,9 @@ export function ThemeProvider({
     document.documentElement.style.setProperty('--theme-border', theme.colors.border);
     document.documentElement.style.setProperty('--theme-font-family', theme.typography.fontFamily.base);
     document.documentElement.style.setProperty('--theme-text-color', theme.colors.text);
-    document.body.style.fontFamily = theme.typography.fontFamily.base;
+    if (!skipBodyFontFamily) {
+      document.body.style.fontFamily = theme.typography.fontFamily.base;
+    }
     document.body.style.color = theme.colors.text;
     document.body.style.backgroundColor = theme.colors.background;
   }, [
@@ -40,6 +46,7 @@ export function ThemeProvider({
     theme.colors.border,
     theme.typography.fontFamily.base,
     theme.colors.text,
+    skipBodyFontFamily,
   ]);
 
   const toggleMode = React.useCallback(() => {

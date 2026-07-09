@@ -14,15 +14,21 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export interface ThemeProviderProps {
   children: ReactNode;
+  initialMode?: ColorMode;
 }
 
 export function ThemeProvider({ 
-  children, 
+  children,
+  initialMode,
 }: ThemeProviderProps) {
   const systemColorScheme = useColorScheme();
   
   // Determine the correct initial mode
+  // Use initialMode prop if provided, otherwise fall back to system color scheme
   const getInitialMode = (): ColorMode => {
+    if (initialMode !== undefined) {
+      return initialMode;
+    }
     return systemColorScheme ?? 'light';
   };
   
@@ -32,8 +38,9 @@ export function ThemeProvider({
   // Sync with system color scheme changes
   // This handles cases where systemColorScheme becomes available after initial render
   // or when the system color scheme changes
+  // Only sync if initialMode was not provided (to respect explicit initial mode)
   React.useEffect(() => {
-    if (!userHasSetMode) {
+    if (!userHasSetMode && initialMode === undefined) {
       const targetMode: ColorMode = systemColorScheme ?? 'light';
       setMode(prevMode => {
         // Update if system color scheme is available and different from current mode
@@ -43,7 +50,7 @@ export function ThemeProvider({
         return prevMode;
       });
     }
-  }, [systemColorScheme, userHasSetMode]);
+  }, [systemColorScheme, userHasSetMode, initialMode]);
   
   // Wrapper for setMode that tracks user interaction
   const handleSetMode = React.useCallback((newMode: ColorMode | ((prev: ColorMode) => ColorMode)) => {

@@ -2,23 +2,46 @@
   "name": "@crfrsr/design-system-react",
   "version": "1.0.0",
   "description": "crfrsr Design System components for React (web)",
+  "keywords": [
+    "design-system",
+    "react",
+    "components",
+    "typography",
+    "theme",
+    "dark-mode",
+    "crfrsr"
+  ],
+  "author": "Cristian Fraser",
+  "license": "MIT",
+  "homepage": "https://github.com/cristianfraser/crfrsr#readme",
+  "bugs": {
+    "url": "https://github.com/cristianfraser/crfrsr/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristianfraser/crfrsr.git",
+    "directory": "packages/react"
+  },
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@crfrsr/design-system-core": "*"
+    "@crfrsr/design-system-core": "^1.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
@@ -31,4 +54,3 @@
     "access": "public"
   }
 }
-

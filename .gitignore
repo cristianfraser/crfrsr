@@ -10,3 +10,7 @@ coverage/
 .vscode/
 *.tsbuildinfo
 
+.yalc/
+yalc.lock
+.pack/
+*.tgz

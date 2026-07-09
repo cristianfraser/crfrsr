@@ -8,17 +8,23 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces",
-    "clean": "npm run clean --workspaces && rm -rf node_modules",
-    "test": "npm run test --workspaces"
+    "build": "npm run build --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present && rm -rf node_modules",
+    "test": "npm run test --workspaces --if-present",
+    "publish:all": "npm run build && npm publish --workspace=@crfrsr/design-system-core && npm publish --workspace=@crfrsr/design-system-react && npm publish --workspace=@crfrsr/design-system-react-native",
+    "yalc:publish": "npm run build && yalc publish --push packages/core && yalc publish --push packages/react && yalc publish --push packages/react-native",
+    "yalc:push": "npm run build && yalc push packages/core && yalc push packages/react && yalc push packages/react-native",
+    "yalc:watch": "npm run yalc:publish && (npm run build --workspaces --if-present -- --watch & nodemon --watch packages --ext js,d.ts --ignore 'packages/**/node_modules/**' --exec 'npm run yalc:push')",
+    "pack:all": "npm run build && mkdir -p .pack && npm pack --workspace=@crfrsr/design-system-core --pack-destination=.pack && npm pack --workspace=@crfrsr/design-system-react --pack-destination=.pack && npm pack --workspace=@crfrsr/design-system-react-native --pack-destination=.pack"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
-    "typescript": "^5.3.3"
+    "nodemon": "^3.1.0",
+    "typescript": "^5.3.3",
+    "yalc": "^1.0.0-pre.53"
   },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
   }
 }
-

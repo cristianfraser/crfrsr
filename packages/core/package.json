@@ -2,16 +2,38 @@
   "name": "@crfrsr/design-system-core",
   "version": "1.0.0",
   "description": "Core design system utilities - colors, themes, and shared types",
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "theme",
+    "colors",
+    "dark-mode",
+    "crfrsr"
+  ],
+  "author": "Cristian Fraser",
+  "license": "MIT",
+  "homepage": "https://github.com/cristianfraser/crfrsr#readme",
+  "bugs": {
+    "url": "https://github.com/cristianfraser/crfrsr/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristianfraser/crfrsr.git",
+    "directory": "packages/core"
+  },
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "devDependencies": {
     "typescript": "^5.3.3"
@@ -20,4 +42,3 @@
     "access": "public"
   }
 }
-

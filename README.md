@@ -215,20 +215,148 @@ The example demonstrates all typography components optimized for mobile platform
 
 ## 🏭 Publishing to NPM
 
-Each package can be published independently to NPM:
+All three packages live under the **`@crfrsr` npm scope**:
+
+- [`@crfrsr/design-system-core`](https://www.npmjs.com/package/@crfrsr/design-system-core)
+- [`@crfrsr/design-system-react`](https://www.npmjs.com/package/@crfrsr/design-system-react)
+- [`@crfrsr/design-system-react-native`](https://www.npmjs.com/package/@crfrsr/design-system-react-native)
+
+### One-time setup
+
+1. Create a free npm account at <https://www.npmjs.com/signup> (use the username `crfrsr` if you want `@crfrsr` as a personal scope, or create an organization named `crfrsr` at <https://www.npmjs.com/org/create>).
+2. Log in locally:
+
+   ```bash
+   npm login
+   ```
+
+3. Confirm you can publish to the scope:
+
+   ```bash
+   npm whoami
+   npm access list packages @crfrsr   # optional sanity check
+   ```
+
+Each `package.json` already declares `"publishConfig": { "access": "public" }`, so scoped packages will publish as public (the default for scoped packages is private, which requires a paid plan).
+
+### Publishing a new version
+
+Bump versions first. The packages are interdependent (`react` and `react-native` depend on `core`), so bump them together to keep things in sync:
 
 ```bash
-cd packages/core
-npm publish
-
-cd ../react
-npm publish
-
-cd ../react-native
-npm publish
+# Patch bump every package to e.g. 1.0.1
+npm version --workspaces --include-workspace-root patch
 ```
 
-Make sure to update version numbers in `package.json` before publishing.
+> If you bump `core`, also update the `^x.y.z` range in `react` and `react-native`'s `dependencies` to match.
+
+Then publish them all in dependency order with a single command:
+
+```bash
+npm run publish:all
+```
+
+This runs `npm run build` first, then publishes `core`, `react`, and `react-native` in that order. Each package's `prepublishOnly` script also runs a clean + build as a final guard.
+
+To publish a single package manually:
+
+```bash
+npm publish --workspace=@crfrsr/design-system-react
+```
+
+## 🔗 Using locally in a sibling project (without publishing)
+
+The recommended workflow uses [**yalc**](https://github.com/wclr/yalc) — it's a local proxy registry that copies the built package into your sibling project. It works much more reliably than `npm link` for React / React Native (no duplicate-React errors, plays nicely with Metro/Webpack/Vite).
+
+Assumes your sibling project is laid out like this:
+
+```
+Projects/
+├── crfrsr/                 # this repo
+└── my-other-app/           # the sibling project that will consume the design system
+```
+
+### Step 1 — In **this** repo, publish the packages to your local yalc store
+
+```bash
+# from the crfrsr/ root
+npm install              # installs yalc + nodemon as devDependencies
+npm run yalc:publish     # builds all packages and publishes them to ~/.yalc
+```
+
+### Step 2 — In the **sibling** project, add the packages
+
+```bash
+cd ../my-other-app
+
+# For a React web app:
+npx yalc add @crfrsr/design-system-core
+npx yalc add @crfrsr/design-system-react
+
+# OR for a React Native app:
+npx yalc add @crfrsr/design-system-core
+npx yalc add @crfrsr/design-system-react-native
+
+npm install
+```
+
+> Why add `core` explicitly? `react` and `react-native` declare `@crfrsr/design-system-core` as a regular `dependencies` entry. When the package is consumed via yalc, that dependency still needs to resolve — adding `core` via yalc points it at your local build instead of npm.
+
+### Step 3 — Iterate
+
+Whenever you change source code in `crfrsr/`, push the rebuilt output to every sibling project that has yalc-added the package:
+
+```bash
+# from crfrsr/ root
+npm run yalc:push   # build + push to all subscribers
+```
+
+For a tighter loop, run the watcher and any change is auto-pushed:
+
+```bash
+npm run yalc:watch
+```
+
+### Cleaning up
+
+In the sibling project, when you're ready to switch back to the published npm version:
+
+```bash
+npx yalc remove --all
+npm install
+```
+
+### Alternative 1 — `npm link` (built-in, no extra tools)
+
+`npm link` works but is fragile with React peer deps. If you want to try it:
+
+```bash
+# from crfrsr/ root, register each package as a global symlink
+cd packages/core         && npm link && cd -
+cd packages/react        && npm link && cd -
+cd packages/react-native && npm link && cd -
+
+# from the sibling project, consume them
+cd ../my-other-app
+npm link @crfrsr/design-system-core @crfrsr/design-system-react
+```
+
+If you hit "Invalid hook call" or "two copies of React" errors, switch to yalc — that's exactly the class of problem it solves.
+
+### Alternative 2 — `npm pack` tarballs (zero-tool)
+
+For one-off testing without any tooling:
+
+```bash
+# from crfrsr/ root
+npm run pack:all   # produces .pack/*.tgz files
+
+# from the sibling project
+npm install ../crfrsr/.pack/crfrsr-design-system-core-1.0.0.tgz \
+            ../crfrsr/.pack/crfrsr-design-system-react-1.0.0.tgz
+```
+
+This installs the exact same artifact npm would publish — useful as a final smoke test before `npm publish`.
 
 ## 🛠️ Development
 
