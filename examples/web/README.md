@@ -1,6 +1,6 @@
 # crfrsr Design System - Web Example
 
-This is a minimal example application demonstrating the usage of `@crfrsr/design-system-react` in a React web application.
+This is a minimal example application demonstrating the usage of `@crfrsr/ui` in a React web application.
 
 ## Getting Started
 

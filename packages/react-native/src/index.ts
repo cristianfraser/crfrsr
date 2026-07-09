@@ -1,5 +1,5 @@
 /**
- * @crfrsr/design-system-react-native
+ * @crfrsr/ui-native
  * React Native components for crfrsr Design System
  */
 

@@ -1,5 +1,5 @@
 /**
- * @crfrsr/design-system-core
+ * @crfrsr/core
  * Core design system utilities
  */
 

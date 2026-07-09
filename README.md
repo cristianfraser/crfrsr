@@ -24,11 +24,11 @@ crfrsr/
 
 ### Package Structure
 
-- **`@crfrsr/design-system-core`**: Core utilities including color palettes, theme definitions, and shared types. Platform-agnostic and used by both React and React Native packages.
+- **`@crfrsr/core`**: Core utilities including color palettes, theme definitions, and shared types. Platform-agnostic and used by both React and React Native packages.
 
-- **`@crfrsr/design-system-react`**: React components for web applications. Includes typography components that work seamlessly with React.
+- **`@crfrsr/ui`**: React components for web applications. Includes typography components that work seamlessly with React.
 
-- **`@crfrsr/design-system-react-native`**: React Native components for mobile applications. Includes typography components optimized for mobile platforms.
+- **`@crfrsr/ui-native`**: React Native components for mobile applications. Includes typography components optimized for mobile platforms.
 
 ## 🚀 Getting Started
 
@@ -59,7 +59,7 @@ npm run build
 The core package provides the foundation for the design system:
 
 ```typescript
-import { createTheme, getColors, ColorMode } from '@crfrsr/design-system-core';
+import { createTheme, getColors, ColorMode } from '@crfrsr/core';
 
 const theme = createTheme('light'); // or 'dark'
 const colors = getColors('light');
@@ -70,13 +70,13 @@ const colors = getColors('light');
 Install in your React web application:
 
 ```bash
-npm install @crfrsr/design-system-react
+npm install @crfrsr/ui
 ```
 
 Usage:
 
 ```tsx
-import { ThemeProvider, Text, Heading } from '@crfrsr/design-system-react';
+import { ThemeProvider, Text, Heading } from '@crfrsr/ui';
 
 function App() {
   return (
@@ -95,13 +95,13 @@ function App() {
 Install in your React Native application:
 
 ```bash
-npm install @crfrsr/design-system-react-native
+npm install @crfrsr/ui-native
 ```
 
 Usage:
 
 ```tsx
-import { ThemeProvider, Text, Heading } from '@crfrsr/design-system-react-native';
+import { ThemeProvider, Text, Heading } from '@crfrsr/ui-native';
 
 function App() {
   return (
@@ -164,7 +164,7 @@ The `Heading` component provides semantic heading elements:
 The Design System includes built-in support for Dark Mode through a dynamic color palette:
 
 ```tsx
-import { ThemeProvider } from '@crfrsr/design-system-react';
+import { ThemeProvider } from '@crfrsr/ui';
 
 function App() {
   const { setMode } = useTheme();
@@ -217,9 +217,9 @@ The example demonstrates all typography components optimized for mobile platform
 
 All three packages live under the **`@crfrsr` npm scope**:
 
-- [`@crfrsr/design-system-core`](https://www.npmjs.com/package/@crfrsr/design-system-core)
-- [`@crfrsr/design-system-react`](https://www.npmjs.com/package/@crfrsr/design-system-react)
-- [`@crfrsr/design-system-react-native`](https://www.npmjs.com/package/@crfrsr/design-system-react-native)
+- [`@crfrsr/core`](https://www.npmjs.com/package/@crfrsr/core)
+- [`@crfrsr/ui`](https://www.npmjs.com/package/@crfrsr/ui)
+- [`@crfrsr/ui-native`](https://www.npmjs.com/package/@crfrsr/ui-native)
 
 ### One-time setup
 
@@ -261,7 +261,7 @@ This runs `npm run build` first, then publishes `core`, `react`, and `react-nati
 To publish a single package manually:
 
 ```bash
-npm publish --workspace=@crfrsr/design-system-react
+npm publish --workspace=@crfrsr/ui
 ```
 
 ## 🔗 Using locally in a sibling project (without publishing)
@@ -290,17 +290,17 @@ npm run yalc:publish     # builds all packages and publishes them to ~/.yalc
 cd ../my-other-app
 
 # For a React web app:
-npx yalc add @crfrsr/design-system-core
-npx yalc add @crfrsr/design-system-react
+npx yalc add @crfrsr/core
+npx yalc add @crfrsr/ui
 
 # OR for a React Native app:
-npx yalc add @crfrsr/design-system-core
-npx yalc add @crfrsr/design-system-react-native
+npx yalc add @crfrsr/core
+npx yalc add @crfrsr/ui-native
 
 npm install
 ```
 
-> Why add `core` explicitly? `react` and `react-native` declare `@crfrsr/design-system-core` as a regular `dependencies` entry. When the package is consumed via yalc, that dependency still needs to resolve — adding `core` via yalc points it at your local build instead of npm.
+> Why add `core` explicitly? `react` and `react-native` declare `@crfrsr/core` as a regular `dependencies` entry. When the package is consumed via yalc, that dependency still needs to resolve — adding `core` via yalc points it at your local build instead of npm.
 
 ### Step 3 — Iterate
 
@@ -338,7 +338,7 @@ cd packages/react-native && npm link && cd -
 
 # from the sibling project, consume them
 cd ../my-other-app
-npm link @crfrsr/design-system-core @crfrsr/design-system-react
+npm link @crfrsr/core @crfrsr/ui
 ```
 
 If you hit "Invalid hook call" or "two copies of React" errors, switch to yalc — that's exactly the class of problem it solves.

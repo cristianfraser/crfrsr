@@ -1,6 +1,6 @@
 # crfrsr Design System - Mobile Example
 
-This is a minimal example application demonstrating the usage of `@crfrsr/design-system-react-native` in a React Native mobile application using Expo.
+This is a minimal example application demonstrating the usage of `@crfrsr/ui-native` in a React Native mobile application using Expo.
 
 ## Prerequisites
 

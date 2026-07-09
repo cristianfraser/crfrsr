@@ -8,7 +8,7 @@ import {
   Pill,
   Combobox,
   CommandItem,
-} from '@crfrsr/design-system-react';
+} from '@crfrsr/ui';
 import './App.css';
 
 // ---- Components showcase ------------------------------------------------

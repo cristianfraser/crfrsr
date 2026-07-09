@@ -1,5 +1,5 @@
 /**
- * @crfrsr/design-system-react
+ * @crfrsr/ui
  * React components for crfrsr Design System
  */
 

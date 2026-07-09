@@ -7,7 +7,7 @@ import {
   Switch,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { ThemeProvider, Text, Heading, useTheme } from '@crfrsr/design-system-react-native';
+import { ThemeProvider, Text, Heading, useTheme } from '@crfrsr/ui-native';
 
 function AppContent(): JSX.Element {
   const { theme, setMode, isLight } = useTheme();

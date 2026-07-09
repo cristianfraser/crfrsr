@@ -1,5 +1,5 @@
 {
-  "name": "@crfrsr/design-system-react",
+  "name": "@crfrsr/ui",
   "version": "1.0.0",
   "description": "crfrsr Design System components for React (web)",
   "keywords": [
@@ -53,7 +53,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@crfrsr/design-system-core": "^1.0.0",
+    "@crfrsr/core": "^1.0.0",
     "@radix-ui/react-popover": "^1.1.2",
     "@tanstack/react-virtual": "^3.10.8",
     "clsx": "^2.1.1",

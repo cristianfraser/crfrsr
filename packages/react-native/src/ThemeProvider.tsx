@@ -1,6 +1,6 @@
 import React, { createContext, useContext, ReactNode } from 'react';
 import { Platform, useColorScheme } from 'react-native';
-import { Theme, createTheme, ColorMode } from '@crfrsr/design-system-core';
+import { Theme, createTheme, ColorMode } from '@crfrsr/core';
 
 interface ThemeContextValue {
   theme: Theme;

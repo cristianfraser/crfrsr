@@ -1,5 +1,5 @@
 {
-  "name": "@crfrsr/design-system-core",
+  "name": "@crfrsr/core",
   "version": "1.0.0",
   "description": "Core design system utilities - colors, themes, and shared types",
   "keywords": [

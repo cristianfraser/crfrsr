@@ -5,7 +5,7 @@ import {
   createTheme,
   ColorMode,
   themeToCssVariables,
-} from '@crfrsr/design-system-core';
+} from '@crfrsr/core';
 
 interface ThemeContextValue {
   theme: Theme;

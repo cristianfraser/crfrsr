@@ -2,7 +2,7 @@
  * crfrsr Design System — tokens.css
  *
  * Static default values for the --crfrsr-* contract. These mirror the light and
- * dark output of `getCssVariables()` in @crfrsr/design-system-core and provide
+ * dark output of `getCssVariables()` in @crfrsr/core and provide
  * first-paint / no-JS / no-ThemeProvider defaults. ThemeProvider overrides these
  * at runtime for the active mode.
  *
