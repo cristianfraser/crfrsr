@@ -26,7 +26,7 @@
 
 html,
 :host {
-  line-height: 1.5;
+  line-height: 1;
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   tab-size: 4;
@@ -241,15 +241,6 @@ textarea::placeholder {
   color: var(--crfrsr-color-text-disabled, #9ca3af);
 }
 
-button,
-[role='button'] {
-  cursor: pointer;
-}
-
-:disabled {
-  cursor: default;
-}
-
 img,
 svg,
 video,
@@ -259,7 +250,6 @@ iframe,
 embed,
 object {
   display: block;
-  vertical-align: middle;
 }
 
 img,
