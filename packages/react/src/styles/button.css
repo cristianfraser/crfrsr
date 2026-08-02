@@ -68,6 +68,33 @@
   background-color: var(--crfrsr-color-surface-hover);
 }
 
+/* danger — destructive actions (delete, remove, discard). */
+.crfrsr-btn--danger {
+  background-color: var(--crfrsr-btn-danger-bg, var(--crfrsr-color-error));
+  color: var(--crfrsr-btn-danger-color, var(--crfrsr-color-text-on-primary));
+}
+.crfrsr-btn--danger:hover:not(:disabled) {
+  background-color: var(
+    --crfrsr-btn-danger-bg-hover,
+    color-mix(in srgb, var(--crfrsr-color-error) 85%, black)
+  );
+}
+
+/* link — anchor-look button for inline text actions (e.g. a table cell that opens
+   a modal). Inherits the surrounding font so it sits in running text; the box/type
+   overrides live after the size rules below, where they beat the `size` classes. */
+.crfrsr-btn--link {
+  background-color: transparent;
+  color: var(--crfrsr-btn-link-color, var(--crfrsr-color-primary));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: inherit;
+  line-height: inherit;
+}
+.crfrsr-btn--link:hover:not(:disabled) {
+  color: var(--crfrsr-btn-link-color-hover, var(--crfrsr-color-primary-dark));
+}
+
 /* ----- Sizes ----------------------------------------------------------- */
 
 .crfrsr-btn--sm {
@@ -86,4 +113,13 @@
   width: 2.25rem;
   height: 2.25rem;
   padding: 0;
+}
+
+/* Link ignores the size classes' box and type scale (declared after them so it
+   wins): zero box, container font size — it must sit inline like an anchor,
+   whatever `size` computes to. */
+.crfrsr-btn--link {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
 }
