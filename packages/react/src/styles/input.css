@@ -48,22 +48,19 @@
 
 /* ----- Sizes ----------------------------------------------------------- */
 
-/* `md` is 1rem type: anything smaller makes mobile Safari zoom the viewport on
-   focus. `sm` is for dense desktop tables, where that trade-off is worth it. */
-
 .crfrsr-input--sm {
+  height: 1.75rem;
+  padding: 0 0.375rem;
+  font-size: var(--crfrsr-font-size-xs, 0.75rem);
+}
+.crfrsr-input--md {
   height: 2rem;
   padding: 0 0.5rem;
   font-size: var(--crfrsr-font-size-sm, 0.875rem);
 }
-.crfrsr-input--md {
+.crfrsr-input--lg {
   height: 2.5rem;
   padding: 0 0.75rem;
-  font-size: var(--crfrsr-font-size-base, 1rem);
-}
-.crfrsr-input--lg {
-  height: 3rem;
-  padding: 0 1rem;
   font-size: var(--crfrsr-font-size-lg, 1.125rem);
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "@crfrsr/ui",
-  "version": "1.1.1",
+  "version": "1.1.1-dev",
   "description": "crfrsr Design System components for React (web)",
   "keywords": [
     "design-system",

@@ -1,17 +1,25 @@
 /* crfrsr Design System — Field (labelled form row) */
 
 .crfrsr-field {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
 .crfrsr-field__label {
-  font-size: var(--crfrsr-font-size-sm, 0.875rem);
+  font-size: var(--crfrsr-font-size-xs, 0.75rem);
   color: var(--crfrsr-color-text-secondary);
 }
 
+/* Out of flow, so showing or hiding it never reflows the form around it. It
+   overlays whatever sits below instead — keep a field's bottom margin clear. */
 .crfrsr-field__error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.125rem;
   font-size: var(--crfrsr-font-size-xs, 0.75rem);
   color: var(--crfrsr-color-error);
 }
