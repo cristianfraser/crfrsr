@@ -132,12 +132,17 @@ function ComponentsShowcase() {
         <Heading level={3} style={{ marginBottom: '1rem' }}>
           Input
         </Heading>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', marginBottom: '1rem' }}>
+        {/* Inputs fill their container, so each demo sits in a sized cell. */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+            gap: '0.75rem',
+          }}
+        >
           <Input size="sm" placeholder="Small" aria-label="small input" />
           <Input size="md" placeholder="Medium" aria-label="medium input" />
           <Input size="lg" placeholder="Large" aria-label="large input" />
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
           <Input defaultValue="Disabled" disabled aria-label="disabled input" />
           <Input defaultValue="Invalid" aria-invalid="true" aria-label="invalid input" />
           <Input type="search" placeholder="Search" aria-label="search input" />
@@ -151,9 +156,15 @@ function ComponentsShowcase() {
         <Heading level={3} style={{ marginBottom: '1rem' }}>
           Textarea
         </Heading>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'flex-start' }}>
-          <Textarea rows={4} cols={30} placeholder="Resizes vertically" aria-label="textarea" />
-          <Textarea rows={4} cols={20} size="sm" defaultValue="Small, disabled" disabled aria-label="disabled textarea" />
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+            gap: '0.75rem',
+          }}
+        >
+          <Textarea rows={4} placeholder="Resizes vertically" aria-label="textarea" />
+          <Textarea rows={4} size="sm" defaultValue="Small, disabled" disabled aria-label="disabled textarea" />
         </div>
       </div>
 
@@ -162,7 +173,14 @@ function ComponentsShowcase() {
         <Heading level={3} style={{ marginBottom: '1rem' }}>
           Field
         </Heading>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-start' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+            gap: '1rem',
+            alignItems: 'start',
+          }}
+        >
           <Field label="Amount">
             <Input type="number" defaultValue={1000} />
           </Field>
@@ -170,7 +188,7 @@ function ComponentsShowcase() {
             <Input type="email" defaultValue="not-an-email" aria-invalid="true" />
           </Field>
           <Field label="Notes">
-            <Textarea rows={3} cols={24} placeholder="Optional" />
+            <Textarea rows={3} placeholder="Optional" />
           </Field>
         </div>
       </div>
