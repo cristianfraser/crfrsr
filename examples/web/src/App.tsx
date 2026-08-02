@@ -8,6 +8,9 @@ import {
   Pill,
   Combobox,
   CommandItem,
+  Input,
+  Textarea,
+  Field,
 } from '@crfrsr/ui';
 import './App.css';
 
@@ -121,6 +124,54 @@ function ComponentsShowcase() {
           <Text color="textSecondary" variant="sm">
             Selected: {selected ? selected.label : 'none'}
           </Text>
+        </div>
+      </div>
+
+      {/* Input */}
+      <div style={cardStyle}>
+        <Heading level={3} style={{ marginBottom: '1rem' }}>
+          Input
+        </Heading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', marginBottom: '1rem' }}>
+          <Input size="sm" placeholder="Small" aria-label="small input" />
+          <Input size="md" placeholder="Medium" aria-label="medium input" />
+          <Input size="lg" placeholder="Large" aria-label="large input" />
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
+          <Input defaultValue="Disabled" disabled aria-label="disabled input" />
+          <Input defaultValue="Invalid" aria-invalid="true" aria-label="invalid input" />
+          <Input type="search" placeholder="Search" aria-label="search input" />
+          <Input type="number" defaultValue={42} aria-label="number input" />
+          <Input type="date" aria-label="date input" />
+        </div>
+      </div>
+
+      {/* Textarea */}
+      <div style={cardStyle}>
+        <Heading level={3} style={{ marginBottom: '1rem' }}>
+          Textarea
+        </Heading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'flex-start' }}>
+          <Textarea rows={4} cols={30} placeholder="Resizes vertically" aria-label="textarea" />
+          <Textarea rows={4} cols={20} size="sm" defaultValue="Small, disabled" disabled aria-label="disabled textarea" />
+        </div>
+      </div>
+
+      {/* Field */}
+      <div style={cardStyle}>
+        <Heading level={3} style={{ marginBottom: '1rem' }}>
+          Field
+        </Heading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-start' }}>
+          <Field label="Amount">
+            <Input type="number" defaultValue={1000} />
+          </Field>
+          <Field label="Email" error="Enter a valid email address.">
+            <Input type="email" defaultValue="not-an-email" aria-invalid="true" />
+          </Field>
+          <Field label="Notes">
+            <Textarea rows={3} cols={24} placeholder="Optional" />
+          </Field>
         </div>
       </div>
     </section>

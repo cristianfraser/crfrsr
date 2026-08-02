@@ -159,6 +159,65 @@ The `Heading` component provides semantic heading elements:
 </Heading>
 ```
 
+## 📝 Form Components
+
+Web only (`@crfrsr/ui`). All three render plain elements and forward every native
+attribute, so state is expressed the native way: `disabled` for disabled, and
+`aria-invalid="true"` for the error styling — there is no `invalid` prop.
+
+### Input Component
+
+Single-line text input.
+
+**Props:**
+- `size`: `'sm' | 'md' | 'lg'` - Visual size (default `'md'`). Shadows the native numeric `size` attribute, which is not supported — set the width in CSS instead.
+- Plus every `<input>` attribute (`type`, `value`, `placeholder`, `disabled`, `inputMode`, …).
+
+Use it for textual types (`text`, `search`, `number`, `date`, `month`, …).
+Checkboxes, radios and file inputs keep their native rendering — do not put
+`Input` around them. The control keeps its intrinsic width, so it sits inline in
+a toolbar; inside a `Field` it stretches to the full row.
+
+**Example:**
+```tsx
+<Input type="search" placeholder="Search accounts" aria-label="Search accounts" />
+
+<Input size="sm" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
+
+<Input value={email} onChange={onChange} aria-invalid={!valid || undefined} />
+```
+
+### Textarea Component
+
+Multi-line input. Shares the `Input` box styling and conventions; resizes
+vertically.
+
+**Props:**
+- `size`: `'sm' | 'md' | 'lg'` - Type scale and horizontal padding (default `'md'`). The box height comes from `rows`.
+- Plus every `<textarea>` attribute (`rows`, `value`, `placeholder`, `disabled`, …).
+
+**Example:**
+```tsx
+<Textarea rows={8} value={pasted} onChange={(e) => setPasted(e.target.value)} />
+```
+
+### Field Component
+
+A labelled form row: label above the control, optional error message below. The
+control is nested inside the `<label>`, so it is associated implicitly — no
+`id`/`htmlFor` plumbing.
+
+**Props:**
+- `label`: `ReactNode` - Label text shown above the control
+- `error`: `ReactNode` - Error message shown below the control; rendered only when truthy
+
+**Example:**
+```tsx
+<Field label="Monthly amount" error={invalid ? 'Enter a value between 0 and 100' : undefined}>
+  <Input type="number" value={value} onChange={onChange} aria-invalid={invalid || undefined} />
+</Field>
+```
+
 ## 🌓 Dark Mode Support
 
 The Design System includes built-in support for Dark Mode through a dynamic color palette:
@@ -408,7 +467,7 @@ npm run clean
 
 ## 🔮 Future Enhancements
 
-- Additional UI components (Buttons, Cards, Inputs, etc.)
+- Additional UI components (Cards, Select, checkbox/radio, etc.)
 - Animation system
 - Accessibility improvements
 - Storybook documentation

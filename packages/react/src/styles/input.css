@@ -1,0 +1,79 @@
+/* crfrsr Design System — Input & Textarea */
+
+/* No width or display rule on purpose: the control keeps its intrinsic width,
+   so it sits inline in filter bars and toolbars, and stretches on its own
+   inside a flex-column container such as .crfrsr-field. */
+.crfrsr-input {
+  font-family: inherit;
+  line-height: 1.25;
+  color: var(--crfrsr-color-text);
+  background-color: var(--crfrsr-color-surface);
+  border: 1px solid var(--crfrsr-color-border);
+  border-radius: var(--crfrsr-radius-lg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crfrsr-input::placeholder {
+  opacity: 1;
+  color: var(--crfrsr-color-text-disabled);
+}
+
+.crfrsr-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--crfrsr-color-background),
+    0 0 0 4px var(--crfrsr-color-focus-ring);
+}
+
+.crfrsr-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Error state rides in on the native attribute, the way `disabled` does —
+   there is no `invalid` prop. */
+.crfrsr-input[aria-invalid='true'] {
+  border-color: var(--crfrsr-color-error);
+}
+.crfrsr-input[aria-invalid='true']:focus-visible {
+  box-shadow: 0 0 0 2px var(--crfrsr-color-background),
+    0 0 0 4px var(--crfrsr-color-error);
+}
+
+/* Autofill paints its own background; repaint it with the token colors. */
+.crfrsr-input:-webkit-autofill,
+.crfrsr-input:-webkit-autofill:hover,
+.crfrsr-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--crfrsr-color-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--crfrsr-color-surface) inset;
+}
+
+/* ----- Sizes ----------------------------------------------------------- */
+
+/* `md` is 1rem type: anything smaller makes mobile Safari zoom the viewport on
+   focus. `sm` is for dense desktop tables, where that trade-off is worth it. */
+
+.crfrsr-input--sm {
+  height: 2rem;
+  padding: 0 0.5rem;
+  font-size: var(--crfrsr-font-size-sm, 0.875rem);
+}
+.crfrsr-input--md {
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  font-size: var(--crfrsr-font-size-base, 1rem);
+}
+.crfrsr-input--lg {
+  height: 3rem;
+  padding: 0 1rem;
+  font-size: var(--crfrsr-font-size-lg, 1.125rem);
+}
+
+/* Textarea drops the size classes' fixed height (declared after them so it
+   wins) — `rows` governs the box — and pads vertically instead. */
+.crfrsr-textarea {
+  height: auto;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  line-height: 1.5;
+  /* resize: vertical comes from reset.css */
+}

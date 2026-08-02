@@ -1,0 +1,17 @@
+/* crfrsr Design System — Field (labelled form row) */
+
+.crfrsr-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.crfrsr-field__label {
+  font-size: var(--crfrsr-font-size-sm, 0.875rem);
+  color: var(--crfrsr-color-text-secondary);
+}
+
+.crfrsr-field__error {
+  font-size: var(--crfrsr-font-size-xs, 0.75rem);
+  color: var(--crfrsr-color-error);
+}
