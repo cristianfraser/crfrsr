@@ -97,21 +97,28 @@
 
 /* ----- Sizes ----------------------------------------------------------- */
 
+/* Fixed heights on the input scale (sm/md/lg = 1.75/2/2.5rem, xs/sm/lg type),
+   so a button and an input on the same size step share a height in a plain
+   flex row with no extra alignment. */
+
 .crfrsr-btn--sm {
-  padding: 0.375rem 0.75rem;
-  font-size: var(--crfrsr-font-size-sm, 0.875rem);
+  height: 1.75rem;
+  padding: 0 0.75rem;
+  font-size: var(--crfrsr-font-size-xs, 0.75rem);
 }
 .crfrsr-btn--md {
-  padding: 0.5rem 1rem;
-  font-size: var(--crfrsr-font-size-base, 1rem);
+  height: 2rem;
+  padding: 0 1rem;
+  font-size: var(--crfrsr-font-size-sm, 0.875rem);
 }
 .crfrsr-btn--lg {
-  padding: 0.75rem 1.5rem;
+  height: 2.5rem;
+  padding: 0 1.5rem;
   font-size: var(--crfrsr-font-size-lg, 1.125rem);
 }
 .crfrsr-btn--icon {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2rem;
+  height: 2rem;
   padding: 0;
 }
 
@@ -119,6 +126,7 @@
    wins): zero box, container font size — it must sit inline like an anchor,
    whatever `size` computes to. */
 .crfrsr-btn--link {
+  height: auto;
   margin: 0;
   padding: 0;
   font-size: inherit;

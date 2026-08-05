@@ -151,6 +151,90 @@ function ComponentsShowcase() {
         </div>
       </div>
 
+      {/* Input + Button */}
+      <div id="input-button" style={cardStyle}>
+        <Heading level={3} style={{ marginBottom: '1rem' }}>
+          Input + Button
+        </Heading>
+        <Text color="textSecondary" variant="sm" style={{ marginBottom: '0.75rem' }}>
+          Controls on the same size step share a height, so a plain flex row
+          lines up without any extra alignment.
+        </Text>
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
+          <Input type="email" placeholder="you@example.com" aria-label="email address" />
+          <Button>Subscribe</Button>
+          <Button size="icon" variant="outline" aria-label="favorite">★</Button>
+        </div>
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
+          <Input size="sm" placeholder="Filter rows…" aria-label="filter rows" />
+          <Button size="sm" variant="outline">Apply</Button>
+        </div>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <Input size="lg" type="search" placeholder="Search the docs" aria-label="search the docs" />
+          <Button size="lg" variant="secondary">Search</Button>
+        </div>
+      </div>
+
+      {/* Labelled inputs + buttons on one row (nw-tracker layout) */}
+      <div id="nw-tracker" style={cardStyle}>
+        <Heading level={3} style={{ marginBottom: '1rem' }}>
+          Labelled inputs + buttons on one row
+        </Heading>
+        <Text color="textSecondary" variant="sm" style={{ marginBottom: '0.75rem' }}>
+          Inputs wrapped in column-flex labels beside plain buttons, row on
+          flex-end. Buttons a step below the inputs (md inputs, sm buttons) sit
+          4px shorter:
+        </Text>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'flex-end', marginBottom: '1.25rem' }}>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+            <span style={{ fontSize: 'var(--crfrsr-font-size-xs)', color: theme.colors.textSecondary }}>
+              Monto (CLP)
+            </span>
+            <Input type="number" defaultValue={583492} />
+          </label>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+            <span style={{ fontSize: 'var(--crfrsr-font-size-xs)', color: theme.colors.textSecondary }}>
+              Fecha
+            </span>
+            <Input type="date" defaultValue="2017-06-30" />
+          </label>
+          <Button size="sm">Guardar</Button>
+          <Button size="sm" variant="secondary">Quitar ancla</Button>
+        </div>
+        <Text color="textSecondary" variant="sm" style={{ marginBottom: '0.75rem' }}>
+          Buttons on the same step as the inputs (both md) sit flush:
+        </Text>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'flex-end', marginBottom: '1.25rem' }}>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+            <span style={{ fontSize: 'var(--crfrsr-font-size-xs)', color: theme.colors.textSecondary }}>
+              Monto (CLP)
+            </span>
+            <Input type="number" defaultValue={583492} />
+          </label>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+            <span style={{ fontSize: 'var(--crfrsr-font-size-xs)', color: theme.colors.textSecondary }}>
+              Fecha
+            </span>
+            <Input type="date" defaultValue="2017-06-30" />
+          </label>
+          <Button>Guardar</Button>
+          <Button variant="secondary">Quitar ancla</Button>
+        </div>
+        <Text color="textSecondary" variant="sm" style={{ marginBottom: '0.75rem' }}>
+          Same thing with Field instead of a hand-rolled label:
+        </Text>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'flex-end' }}>
+          <Field label="Monto (CLP)">
+            <Input type="number" defaultValue={583492} />
+          </Field>
+          <Field label="Fecha">
+            <Input type="date" defaultValue="2017-06-30" />
+          </Field>
+          <Button>Guardar</Button>
+          <Button variant="secondary">Quitar ancla</Button>
+        </div>
+      </div>
+
       {/* Textarea */}
       <div style={cardStyle}>
         <Heading level={3} style={{ marginBottom: '1rem' }}>

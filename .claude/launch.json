@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web-example",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--workspace=crfrsr-design-system-web-example"],
+      "port": 3000
+    }
+  ]
+}
